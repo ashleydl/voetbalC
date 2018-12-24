@@ -9,7 +9,6 @@ namespace voetbalC
     class Program
     {
 
-
         static void Main(string[] args)
         {
             //Aantal spelers
@@ -27,7 +26,7 @@ namespace voetbalC
                 }
             }
 
-            //Namem spelers
+            //Namen spelers
 
             List<SpelerInfo> alleSpelers = new List<SpelerInfo>();
 
@@ -72,19 +71,28 @@ namespace voetbalC
                                 //Foutmelding als het geen getal is
                                 TryAnswer();
                             }
+                            
                         }
-
                         // Sla de positie en waarde op
                         nItem.PositieInfo.Add(new PositieInfo { Positie = (Positie)pteller, PositieWaarde = intSterkte });
                     }
                     pteller++;
                 }
                 alleSpelers.Add(nItem);
-           
 
 
-            
+                //Namen en posities voor teams
 
+                int AantalTeams = 2;
+                List<SpelerInfo> alleTeams = new List<SpelerInfo>();
+
+                for (int x = 0; x < AantalTeams; x++)
+                {
+                    Console.WriteLine(string.Format("Geeft de naam op van Team {0}.", x + 1));
+                    var TeamNaam = TryAnswer();    
+                }
+
+          
                 // Loop alle spelers langs
                 foreach (var item in alleSpelers)
                 {
