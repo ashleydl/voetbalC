@@ -10,15 +10,18 @@ namespace voetbalC
     {
         public string Naam { get; set; }
         public List<SpelerInfo> Spelers { get; set; }
+        public List <OpstellingInfo> Opstellinginfo { get; set; }
 
         public Team()
         {
             Spelers = new List<SpelerInfo>();
+            Opstellinginfo = new List<OpstellingInfo>();
         }
     }
 
     public class Opstelling
     {
+
         public List<PositieInfo> PositieInfo { get; set; }
 
         public Opstelling()
@@ -29,6 +32,7 @@ namespace voetbalC
     // In deze classe slaan we het aantal per positie voor de opstelling op
     public class OpstellingInfo
     {
+     
         public Positie Positie { get; set; }
         public int PositieAantal { get; set; }
     }

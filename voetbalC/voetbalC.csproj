@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Opstelling.cs" />
+    <Compile Include="berekeningAantalPosities.cs" />
     <Compile Include="Positie.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
