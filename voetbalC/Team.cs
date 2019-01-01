@@ -24,17 +24,23 @@ namespace voetbalC
 
         public List<PositieInfo> PositieInfo { get; set; }
 
+
         public Opstelling()
         {
             PositieInfo = new List<PositieInfo>();
+          
         }
+
     }
     // In deze classe slaan we het aantal per positie voor de opstelling op
-    public class OpstellingInfo
+    public class OpstellingInfo 
     {
      
         public Positie Positie { get; set; }
         public int PositieAantal { get; set; }
+
     }
+  
+    
 
 }
