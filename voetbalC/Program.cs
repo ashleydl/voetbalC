@@ -91,7 +91,7 @@ namespace voetbalC
                         }
                         // Sla de positie en waarde op
                         nItem.PositieInfo.Add(new PositieInfo { Positie = (Positie)pteller, PositieWaarde = intSterkte });
-                        //Reken uit of het aantal posities gelijk is aan aantal spelers
+                    
                     }
                     pteller++;
 
@@ -105,12 +105,13 @@ namespace voetbalC
             //Aantal teams
 
             int intAantalTeams = 2;
+            
             List<Team> alleTeams = new List<Team>();
 
 
             for (int t = 0; t < intAantalTeams; t++)
             {
-                Console.WriteLine(string.Format("Geeft de naam op voor team {0}.", t));
+                Console.WriteLine(string.Format("Geeft de naam op voor team {0}.", t + 1));
                 var naam = TryAnswer();
 
                 //Nieuw item aan van het type Team en sla daar de naam alvast in op.
@@ -119,18 +120,22 @@ namespace voetbalC
                     Naam = naam
                 };
 
+                TeamItem.Spelers = AantalSpelers / 2;
+
+
                 //Sterkte posities
 
                 string positieNaamOpstelling = null;
 
                 int pnteller = 0;
-               
+
 
 
                 while (true)
                 {
                     // Sla de positie naam op in een variable
-                    positieNaamOpstelling = Enum.GetName(typeof(Positie), pnteller + 1);
+                    positieNaamOpstelling = Enum.GetName(typeof(Positie), pnteller);
+                   
 
                     if (string.IsNullOrWhiteSpace(positieNaamOpstelling))
                     {
@@ -139,7 +144,6 @@ namespace voetbalC
                     else
                     {
                         int AantalPosities = 0;
-                        var rekensom = AantalSpelers - 4;
                         while (AantalPosities == 0)
                         {
                             // Vraag de gebruiker om aantal per positie per team
@@ -151,50 +155,68 @@ namespace voetbalC
                             {
                                 TryAnswer();
                             }
+                            int CalculatePlayerPositie = TeamItem.Spelers - AantalPosities;
+                            
+                            //Keeper positie mag niet meer of minder dan 1 zijn
+                            Enum K = Positie.Keeper;
+                            int Keep = Convert.ToInt32(K);
+                            if (CalculatePlayerPositie < 3)
+                            {
+                                Console.WriteLine("Houdt de uitkomst gelijk aan het aantal spelers");
+                                Console.WriteLine("Geef het aantal voor {0} voor team {1}", positieNaamOpstelling, naam);
+                                TryAnswer();
+                                Console.ReadLine();
+                            }
+                           else if (Keep < 1 || Keep > 1)
+                            {
+                                Console.WriteLine("Geef voor Keep 1");
+                                Console.WriteLine("Geef het aantal voor {0} voor team {1}", positieNaamOpstelling, naam);
+                                TryAnswer();
+                                Console.ReadLine();
+                            }
 
-                            //if (rekensom < 0)
-                            //{
-                            //    Console.WriteLine("Houdt de uitkomst gelijk aan het aantal spelers");
-                            //    Console.WriteLine("Geef het aantal voor {0} voor team {1}", positieNaamOpstelling, naam);
-                            //    Console.ReadLine();
-                            //}
-                            // Sla de positie en het aantal ervan op
-
-                            TeamItem.Opstellinginfo.Add(new OpstellingInfo { Positie = (Positie)pnteller, PositieAantal = AantalPosities });
-
-                            pnteller++;
                         }
-
-                        alleTeams.Add(TeamItem);
-                    }
+                        TeamItem.Opstellinginfo.Add(new OpstellingInfo { Positie = (Positie)pnteller, PositieAantal = AantalPosities });
+                    }         
+                    pnteller++;
+                }
+                    alleTeams.Add(TeamItem);
+                    
                 }
 
-                    // Loop alle spelers langs
-                    foreach (var item in alleSpelers)
-                    {
-                        // Haal de naam op van de positie met de hoogste waarde
-                        var sterkst = item.PositieInfo.OrderByDescending(o => o.PositieWaarde).FirstOrDefault();
-                        // Print de info
-                        Console.WriteLine(string.Format("Speler: {0} is het sterkt als {1}", item.Naam, Enum.GetName(typeof(Positie), sterkst.Positie)));
-                    }
 
-                }
+
+
+
+
+                //    // Loop alle spelers langs
+                //    foreach (var item in alleSpelers)
+                //    {
+                //        // Haal de naam op van de positie met de hoogste waarde
+                //        var sterkst = item.PositieInfo.OrderByDescending(o => o.PositieWaarde).FirstOrDefault();
+                //        // Print de info
+                //        Console.WriteLine(string.Format("Speler: {0} is het sterkt als {1}", item.Naam, Enum.GetName(typeof(Positie), sterkst.Positie)));
+                //    }
+
             
+                while(true)
+                
 
-                foreach (var item in alleTeams)
-                {
-                    //Zoek uit hoe het laagste getal gepakt wordt
-                    var laagstePositie = item.Opstellinginfo.OrderByDescending(z => z.PositieAantal).FirstOrDefault();
-                    //var smallest_age = item.Opstellinginfo.SingleOrDefault(arg => arg.PositieAantal == item.Opstellinginfo.Min(arg => arg.PositieAantal));
-                    //var result2 = item.Opstellinginfo.FirstOrDefault(arg => arg.PositieAantal == item.Opstellinginfo.Min(arg => arg.PositieAantal));
+                //foreach (var item in alleTeams)
+                //{
+                //    //Zoek uit hoe het laagste getal gepakt wordt
+                //    var laagstePositie = item.Opstellinginfo.OrderByDescending(z => z.PositieAantal).FirstOrDefault();
+                //    //var smallest_age = item.Opstellinginfo.SingleOrDefault(arg => arg.PositieAantal == item.Opstellinginfo.Min(arg => arg.PositieAantal));
+                //    //var result2 = item.Opstellinginfo.FirstOrDefault(arg => arg.PositieAantal == item.Opstellinginfo.Min(arg => arg.PositieAantal));
 
-                    Console.WriteLine(string.Format("Team: {0} heeft het laagste {1}", item.Naam, Enum.GetName(typeof(Positie), laagstePositie.Positie)));
-                }
+                //    Console.WriteLine(string.Format("Team: {0} heeft het laagste {1}", item.Naam, Enum.GetName(typeof(Positie), laagstePositie.Positie)));
+                //}
 
                 // FIN!
                 Console.ReadLine();
 
-                //verdeel in 2 teams
+                
+
                 //zet naam op positie
 
 

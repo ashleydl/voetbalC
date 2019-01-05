@@ -9,15 +9,18 @@ namespace voetbalC
     public class Team
     {
         public string Naam { get; set; }
-        public List<SpelerInfo> Spelers { get; set; }
-        public List <OpstellingInfo> Opstellinginfo { get; set; }
+        public int Spelers { get; set; }
+        public List<OpstellingInfo> Opstellinginfo { get; set; }
 
         public Team()
         {
-            Spelers = new List<SpelerInfo>();
+          
             Opstellinginfo = new List<OpstellingInfo>();
+
         }
     }
+
+    
 
     public class Opstelling
     {

@@ -13,12 +13,6 @@ namespace voetbalC
         public Team Team2 { get; set; }
         public List<Opstelling> Opstelling { get; set; }
 
-        public Verdeling()
-        {
-            Team1 = new Team();
-            Team2 = new Team();
-        }
-
 
     }
 }
