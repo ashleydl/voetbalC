@@ -14,7 +14,7 @@ namespace voetbalC
 
         public Team()
         {
-          
+
             Opstellinginfo = new List<OpstellingInfo>();
 
         }
@@ -31,7 +31,6 @@ namespace voetbalC
         public Opstelling()
         {
             PositieInfo = new List<PositieInfo>();
-          
         }
 
     }
@@ -41,9 +40,5 @@ namespace voetbalC
      
         public Positie Positie { get; set; }
         public int PositieAantal { get; set; }
-
     }
-  
-    
-
 }
